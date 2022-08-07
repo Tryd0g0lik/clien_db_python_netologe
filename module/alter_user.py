@@ -1,4 +1,4 @@
-
+import psycopg2 as psy
 import re
 
 class AlterUser:
@@ -22,7 +22,7 @@ class AlterUser:
       email = email.strip()
       data_var = AlterUser._select_data_user(self, email, curs)
       AlterUser._alter_data_user(self, data_var, conn, curs)
-    print("Сжедано.")
+    print("Сделано.")
     return
 
   def _select_data_user(self, d_var, curs):

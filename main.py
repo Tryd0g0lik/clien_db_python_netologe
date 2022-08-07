@@ -1,5 +1,7 @@
 from module.alter_user import AlterUser
+from module.drop_user import DropUser
 import psycopg2 as psy
+import re
 
 def mine_menu():
   print("""
@@ -7,8 +9,7 @@ def mine_menu():
     добавить нового клиента - a
     добавить телефон        - ph
     изменить данные         - al
-    удалить телефон         - dp
-    удалить клиента         - dc
+    удалить клиента         - dr
     найти клиента           - s
     выйти                   - ex
   """)
@@ -35,12 +36,40 @@ def insert_phone(email_var, phone_var,conn, curs):
   return
 
 
+def serch_client():
+  print("""Введите пользовательские данные""")
+  d_var = input(": ")
+  d_var = d_var.strip().replace("-", "").replace(" ", "").lstrip("+7").lstrip("8")
 
+
+
+  text_var = re.compile(r"[^0-9*\s\W][a-zа-яё]*", re.I)
+  integer_var = re.compile(r"[0-9*]{3,}[^a-zа-яё]*", re.I)
+
+  if re.match(integer_var, d_var):
+    d_var = int(d_var)
+
+    curs.execute("""select u.name, u.subname, u.email_user, pu.phone_user from phone_user pu 
+    join users u on u.email_user = pu.email_user 
+    where pu.phone_user = %s;""", (d_var,))
+
+  elif re.match(text_var, d_var.strip()):
+
+    curs.execute("""select u.name, u.subname, u.email_user, pu.phone_user from phone_user pu 
+        join users u on u.email_user = pu.email_user
+        where u.name = %s or u.subname = %s or u.email_user = %s;""", (d_var, d_var, d_var))
+
+
+  else:
+    print("Ошибка")
+
+  data_var= (curs.fetchall())
+  for c in data_var:
+   print(c)
+
+  return data_var
 
 if __name__ == ('__main__'):
-
-  # print(type(np.int32(33333333)))
-  # print(np.int32(33333333))
   conn = psy.connect(
     database = "client_db",
     password = "nlo7",
@@ -75,6 +104,13 @@ with conn:
       elif r == 'al':
         user = AlterUser()
         user.alter_user(conn, curs)
+
+      elif r == 'dr':
+        user = DropUser()
+        user.drop_user(conn, curs)
+
+      elif r == 's':
+        serch_client()
 
       elif r == 'ex':
         exit()
