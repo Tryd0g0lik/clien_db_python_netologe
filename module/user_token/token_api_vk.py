@@ -1,18 +1,12 @@
-# from module.user_token.token_api_vk import renameFile
 import os
 import json
-
-
 import vk_api
-
-# from module.keyBot import BasisKey
 
 
 def checkInput():
   while True:
 
     resposne = ((input(': ')).strip())
-
     if resposne in " " or resposne == "":
       print(
         """
@@ -41,8 +35,7 @@ def mainAutor(login, password):
     """ Пример обработки двухфакторной аутентификации """
     vk_session = vk_api.VkApi(
         login, password,
-        scope = "FRIEND.STORIES.MESSAGES",
-    # функция для обработки двухфакторной аутентификации
+        scope="FRIEND.STORIES.MESSAGES",
         auth_handler=auth_handler
     )
 
@@ -54,11 +47,10 @@ def mainAutor(login, password):
     return vk_session
 
 
-
 def renameFile():
     os.rename("vk_config.v2.json", "vk_config.json")
-
     return
+
 
 def jsonGeToken():
   with open("vk_config.json", "r") as vkv2:
@@ -70,7 +62,8 @@ def jsonGeToken():
   if not os.path.exists(".key"):
     from module.keyBot import BasisKey
     file = BasisKey()
-    file.keys() # Make '.key' file
+    file.keys()
+
   if os.path.exists(".key"):
     with open(".key", "r") as file_key:
       fKeys = file_key.read()
@@ -78,7 +71,6 @@ def jsonGeToken():
     with open(".env", "w") as file_env:
       file_env.write( fKeys +
         """
-
 # User_token for VK
 TOKEN_API_VK = %s
 
@@ -88,14 +80,14 @@ user_id_user = %s
     )
     return
 
+
 def token():
 # --------Get token and ID of usser --------
   if not os.path.exists("vk_config.json"):
     if not os.path.exists("vk_config.v2.json"):
-
       print("Your login and Password!")
-      # login, passw = input("Login: "), input("Passw: ")
-      login, passw = "work80@mail.ru", "1rCcelzahUgWp0nrJTMwy7WAtkpi" # checkInput(), checkInput()
+
+      login, passw = "your@mail.ru", "your_password"
       vk_session = mainAutor(login, passw)
       vk_login = vk_api.VkApi(login, passw)
       vk_login.token['access_token']
@@ -104,12 +96,6 @@ def token():
       renameFile()
 
     jsonGeToken()
-
-  # else:
-  #   if not os.path.exists("vk_config.json"):
-  #
-  #     renameFile()
-  #   jsonGeToken()
 
 
 class apiFunction:
@@ -126,11 +112,4 @@ class apiFunction:
         """
         :return: data-user
         """
-
-
         return
-
-
-
-
-
