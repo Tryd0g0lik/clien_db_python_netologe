@@ -1,4 +1,3 @@
-.git/*
 client/*
 .env
 __pycache__

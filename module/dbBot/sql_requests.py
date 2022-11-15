@@ -333,4 +333,3 @@ class sqlTasks():
     )
     metadata.create_all(engine)
     return (users, filters, status, elected_user)
-
