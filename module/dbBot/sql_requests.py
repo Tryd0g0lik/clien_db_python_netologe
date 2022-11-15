@@ -189,10 +189,10 @@ class Botdb():
 
   def insertUser(self, params : list):
     """
-    Data about the authorized user
-     If id_user not exists in the table 'Users' then going recording a new data in the db and will see row 'id_vk' is in db'
-    If td has 'id_vk' when see row A new id_vk №-id_vk (id user which aitorisation in bot) has been inserted in 'user'
-    table.'
+    TODO: Data about the authorized user
+     If id_user not exists in the table 'Users' then going recording a new data in the db and will see row  'id_vk'
+     is in db'    If td has 'id_vk' when see row A new id_vk №-id_vk (id user which aitorisation in bot)  has been
+     inserted in 'user' table.'
     :param params: Params which gets from the bot when went executing 'start' command
     :return: The user id is active
     """
@@ -231,15 +231,14 @@ class sqlTasks():
     """
     :param dbname: Receiving database-name and creating base.
     :param password: 'password' variable has from password default the 'nlo7'
-
-    def __exists() - checking:
+    :return: True or False
+    TODO: def __exists() - checking:
       - True if dataBase-name be exists
       - False if not exists
-    def __connectedPosgres() - connecting with a 'db-postgres'
-    def __createdb() - Build new data-base if it not exists
-    def connectionNewDB() - The buil connection for a new database.
-    def templateTable() - The created templates for a new-db and returned tables from this's new db
-    :return: True or False
+      def __connectedPosgres() - connecting with a 'db-postgres'
+      def __createdb() - Build new data-base if it not exists
+      def connectionNewDB() - The buil connection for a new database.
+      def templateTable() - The created templates for a new-db and returned tables from this's new db
 
     """
 
@@ -341,54 +340,3 @@ class sqlTasks():
     metadata.create_all(engine)
     return (users, filters, status, elected_user)
 
-
-
-
-# class GKUser:
-#
-#   def __init__(self):
-#     """
-#     Get Key-token for User
-#     :return: Key : str
-#     """
-#     self.user_token : str
-#     self.urlAuthorize = "https://oauth.vk.com/authorize/"
-#
-#     # self.headers = {
-#     #   "redirect_url": "http://oauth.vk.com/blank.html"
-#     # }
-#
-#     client_secret = os.environ("client_secret")
-#     self.params = {
-#       "client_id" : "51416002",
-#       "scope" : "messages.photos.friends.stories.pages.groups",
-#       "response_type" : "code",
-#       "display" : "page",
-#       "redirect_url": "https://oauth.vk.com/blank.html",
-#       "client_secret" : client_secret,
-#
-#       "v" : "5.131"
-#     }
-#   def autorisation(self):
-#     var_requests = requests.get(url=self.urlAuthorize, params=self.params) #,
-#
-#     self.user_token = var_requests
-#
-#     return self.user_token
-
-# class Bases:
-#
-#   def __init__(self):
-#
-#     self.urlAuthorize = "https://api.vk.com/method/"
-#     self.user_ids : str
-#     self.params = {
-#       "client_id" : "51416002",
-#       "scope" : "messages.photos.friends.stories.pages.groups",
-#       "response_type" : "code",
-#       "display" : "page",
-#       "redirect_url": "https://oauth.vk.com/blank.html",
-#       "client_secret" : CLIENT_SECRET,
-#
-#       "v" : "5.131"
-#     }
