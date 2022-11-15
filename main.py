@@ -6,7 +6,6 @@ from module.user_token.token_api_vk import token, checkInput
 import os
 
 
-
 class Topmenu:
 
     def topMenu(self):
@@ -16,9 +15,9 @@ class Topmenu:
         return """
        Select the symbol for launch application:
         - 't' get a user-token;
-        - 's' start a Bot;       
+        - 's' start a Bot;
         - 'e' exi;
-        - 'd' create db   
+        - 'd' create db
         """
 
     def insert(self):
@@ -27,7 +26,7 @@ class Topmenu:
         """
 
         print("Choose a command.")
-        response  = ((checkInput())[0]).lower()
+        response = ((checkInput())[0]).lower()
 
         if response in "t":
             # if os.path.isfile(".env"):
@@ -43,29 +42,27 @@ class Topmenu:
                 if event.type == VkBotEventType.MESSAGE_NEW:
                     peer_id = event.object.message['peer_id']
                     event_command = event.object.message['text'].lower()
-                    params = bot.bot_command(event_command, event, peer_id, random_id) #correct
-                    print("params MESSAGE_NEW: ", params)#correct
+                    params = bot.bot_command(event_command, event, peer_id, random_id)  # correct
+                    print("params MESSAGE_NEW: ", params)  # correct
 
-                    if params[1] == 'start': #correct
-                        user_id = list((params[0]).values())[0] #correct
+                    if params[1] == 'start':  # correct
+                        user_id = list((params[0]).values())[0]  # correct
                         print("user_id: ", user_id)
 
                 elif event.type == VkBotEventType.MESSAGE_EVENT:
                     peer_id = event.object.peer_id
                     event_command = event.object.payload['type']
 
-                    params = bot.bot_command(event_command, event, peer_id, random_id)  #correct
-                    print(user_id, "params MESSAGE_EVENT: ", params)#correct
-                    if params[0] == "add_favorites" or params[0] == "add_blacklist":#correct
-                        db.insertElected(user_id=user_id, event_command=params[0], id_elected_user=params[1]) #correct
-                    if type(params) == str and params == "blacklist" or params == "favorites": #correct
-                        if params == "blacklist": #correct
-                            variable_value = 1 #correct
-                        elif params == "favorites": #correct
-                            variable_value = 0 #correct
-                        print(db.public_list(variable_value)) #correct
-
-
+                    params = bot.bot_command(event_command, event, peer_id, random_id)  # correct
+                    print(user_id, "params MESSAGE_EVENT: ", params)  # correct
+                    if params[0] == "add_favorites" or params[0] == "add_blacklist":  # correct
+                        db.insertElected(user_id=user_id, event_command=params[0], id_elected_user=params[1])  # correct
+                    if type(params) == str and params == "blacklist" or params == "favorites":  # correct
+                        if params == "blacklist":  # correct
+                            variable_value = 1  # correct
+                        elif params == "favorites":  # correct
+                            variable_value = 0  # correct
+                        print(db.public_list(variable_value))  # correct
 
         elif response in "d":
             new_db = sqlTasks()
@@ -78,11 +75,8 @@ class Topmenu:
             return
 
 
-
 if __name__ == "__main__":
     while True:
         menu = Topmenu()
         print(menu.topMenu())
         menu.insert()
-
-
